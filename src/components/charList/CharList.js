@@ -46,7 +46,7 @@ class CharList extends Component {
 
         if (char) {
             charList = char.map(item => {
-                return <CharListItem img={item.thumbnail} name={item.name} />
+                return <CharListItem onCharSelected={() => this.props.onCharSelected(item.id)} key={item.id} img={item.thumbnail} name={item.name} />
             })
         }
 
