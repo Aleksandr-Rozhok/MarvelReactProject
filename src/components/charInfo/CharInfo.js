@@ -78,11 +78,13 @@ const View = ({char}) => {
     let {name, description, thumbnail, homepage, wiki, comics} = char;
     const styleForImg = thumbnail.includes("image_not_available") ? {objectFit: "contain"} : null;
     let noComics = ""
+    let tenComics
 
     if (comics.length === 0) {
         noComics = "No comics with this character"
     } else {
-        comics.length = 10;
+        tenComics = Array.from(comics);
+        tenComics.length = 10;
     }
 
     return (
@@ -107,7 +109,7 @@ const View = ({char}) => {
             <div className="char__comics">Comics:</div>
             <ul className="char__comics-list">
                 {
-                    noComics ? noComics : comics.map((item, i) => {
+                    noComics ? noComics : tenComics.map((item, i) => {
                         return (
                             <li key={i} className="char__comics-item">
                                 {item.name}
