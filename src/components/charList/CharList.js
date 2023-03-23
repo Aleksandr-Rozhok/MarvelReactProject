@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import './charList.scss';
@@ -15,10 +15,12 @@ class CharList extends Component {
         error: false,
         newItemLoading: false,
         offset: 210,
-        charEnded: false
+        charEnded: false,
+        activeChar: null
     }
 
     marvelService = new MarvelService();
+    myRef = React.createRef();
 
     componentDidMount() {
         this.onRequest();
@@ -60,14 +62,35 @@ class CharList extends Component {
             error: true
         })
     }
+
+    // onCharFocus = async () => {
+    //     await this.myRef.current.children[this.state.activeChar].focus()
+    //     console.log("click!")
+    // }
+
+    addActiveClass = async (i) => {
+        await this.setState({
+            activeChar: i
+        })
+
+        document.querySelector(".char__item_selected")?.classList.remove("char__item_selected")
+        await this.myRef.current.children[this.state.activeChar].classList.add("char__item_selected")
+        // await this.myRef.onCharFocus()
+    }
     
     render() {
         const {chars, loading, error, offset, newItemLoading, charEnded} = this.state
         let charList = [];
 
         if (chars) {
-            charList = chars.map(item => {
-                return <CharListItem onCharSelected={() => this.props.onCharSelected(item.id)} key={item.id} img={item.thumbnail} name={item.name} />
+            charList = chars.map((item, i) => {
+                return <CharListItem 
+                            addActiveClass={() => this.addActiveClass(i)} 
+                            onCharSelected={() => this.props.onCharSelected(item.id)}
+                            index={i + 10} 
+                            key={item.id} 
+                            img={item.thumbnail} 
+                            name={item.name} />
             })
         }
 
@@ -77,7 +100,7 @@ class CharList extends Component {
         
         return (
             <div className="char__list">
-                <ul className="char__grid">
+                <ul ref={this.myRef} className="char__grid">
                     {errorMessage}
                     {spinner}
                     {content}
