@@ -8,7 +8,7 @@ import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 
 import decoration from '../../resources/img/vision.png';
 
-const  App = () => {
+const App = () => {
 
     const [selectedChar, setChar] = useState(null);
     
