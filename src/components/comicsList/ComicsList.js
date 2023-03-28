@@ -1,51 +1,17 @@
-import { useState, useEffect } from 'react';
-
 import './comicsList.scss';
 
-import useMarvelService from '../../services/MarvelService';
+import {useList} from '../../hooks/list.hook';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
-const ComicsList = (props) => {
+const ComicsList = () => {
+    const {list, offset, newItemLoading, itemEnded, loading, error, onRequest} = useList({limit: 8, type: "comics"});
 
-    const [comics, setComics] = useState([]);
-    const [newItemLoading, setNewItemLoading] = useState(false);
-    const [offset, setOffset] = useState(210);
-    const [comicEnded, setComicEnded] = useState(false);
-
-    const {loading, error, getAllComics} = useMarvelService();
-
-    useEffect(() => {
-        onRequest(offset);
-    }, [])
-
-    const onRequest = (offset) => {
-        onComicsListLoading(true);
-
-        getAllComics(offset)
-            .then(onComicsLoaded);
-    }
-
-    const onComicsListLoading = (initial) => {
-        initial ? setNewItemLoading(false) : setNewItemLoading(true);
-    }
-
-    const onComicsLoaded = (newComic) => {
-        let ended = false;
-        if (newComic.length < 8) {
-            ended = true;
-        }
-
-        setComics(comic => [...comic, ...newComic]);
-        setNewItemLoading(newItemLoading => false);
-        setOffset(offset => offset + 8);
-        setComicEnded(comicEnded => ended);
-    }
-
+    debugger
     let comicsList = [];
 
-    if (comics) {
-        comicsList = comics.map((item, i) => {
+    if (list) {
+        comicsList = list.map((item, i) => {
             return <ComicListItem 
                         key={item.id} 
                         img={item.thumbnail} 
@@ -67,7 +33,7 @@ const ComicsList = (props) => {
             <button 
                 onClick={() => onRequest(offset)}
                 disabled={newItemLoading}
-                style={{'display': comicEnded ? "none" : "block"}} 
+                style={{'display': itemEnded ? "none" : "block"}} 
                 className="button button__main button__long">
                 <div className="inner">load more</div>
             </button>
