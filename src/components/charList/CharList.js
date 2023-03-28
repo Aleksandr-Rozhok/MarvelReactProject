@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './charList.scss';
 
-import MarvelService from '../../services/MarvelService';
+import useMarvelService from '../../services/MarvelService';
 import CharListItem from '../charListItem/charListItem';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
@@ -11,13 +11,11 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 const CharList = (props) => {
 
     const [chars, setChars] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
     const [newItemLoading, setNewItemLoading] = useState(false);
     const [offset, setOffset] = useState(210);
     const [charEnded, setCharEnded] = useState(false);
 
-    const marvelService = new MarvelService();
+    const {loading, error, getAllCharacters} = useMarvelService();
     const myRef = useRef();
 
     useEffect(() => {
@@ -25,16 +23,14 @@ const CharList = (props) => {
     }, [])
 
     const onRequest = (offset) => {
-        onCharListLoading();
+        onCharListLoading(true);
 
-        marvelService
-            .getAllCharacters(offset)
-            .then(onCharsLoaded)
-            .catch(onError)
+        getAllCharacters(offset)
+            .then(onCharsLoaded);
     }
 
-    const onCharListLoading = () => {
-        setNewItemLoading(true);
+    const onCharListLoading = (initial) => {
+        initial ? setNewItemLoading(false) : setNewItemLoading(true);
     }
 
     const onCharsLoaded = (newChars) => {
@@ -44,15 +40,9 @@ const CharList = (props) => {
         }
 
         setChars(chars => [...chars, ...newChars]);
-        setLoading(loading => false);
         setNewItemLoading(newItemLoading => false);
         setOffset(offset => offset + 9);
         setCharEnded(charEnded => ended);
-    }
-
-    const onError = () => {
-        setLoading(loading => false);
-        setError(error => true);
     }
 
     const addActiveClass = async (i) => {
@@ -75,15 +65,14 @@ const CharList = (props) => {
     }
 
     const errorMessage = error ? <ErrorMessage /> : null;
-    const spinner = loading ? <Spinner /> : null;
-    const content = !(loading || error) ? charList : null;
+    const spinner = loading && !newItemLoading ? <Spinner /> : null;
     
     return (
         <div className="char__list">
             <ul ref={myRef} className="char__grid">
                 {errorMessage}
                 {spinner}
-                {content}
+                {charList}
             </ul>
             <button onClick={() => onRequest(offset)}
                     disabled={newItemLoading}
