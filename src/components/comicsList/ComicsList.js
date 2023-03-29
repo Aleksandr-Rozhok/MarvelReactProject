@@ -7,11 +7,10 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 const ComicsList = () => {
     const {list, offset, newItemLoading, itemEnded, loading, error, onRequest} = useList({limit: 8, type: "comics"});
 
-    debugger
     let comicsList = [];
 
     if (list) {
-        comicsList = list.map((item, i) => {
+        comicsList = list.map((item) => {
             return <ComicListItem 
                         key={item.id} 
                         img={item.thumbnail} 

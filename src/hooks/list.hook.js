@@ -15,18 +15,19 @@ export const useList = (props) => {
 
     const onRequest = (offset) => {
         onListLoading(true);
-        debugger
+
         getAllList(props.limit, props.type, offset)
             .then(onLoaded);
     }
 
     const onListLoading = (initial) => {
+        console.log(newItemLoading)
         initial ? setNewItemLoading(false) : setNewItemLoading(true);
     }
 
     const onLoaded = (newItem) => {
         let ended = false;
-        if (newItem.length < props.limit) {
+        if (newItem.length <= props.limit) {
             ended = true;
         }
 
