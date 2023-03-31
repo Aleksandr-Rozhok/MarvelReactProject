@@ -9,7 +9,13 @@ import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
 const CharList = (props) => {
-    const {list, offset, newItemLoading, itemEnded, loading, error, onRequest} = useList({limit: 9, type: "characters"});
+    const {list, 
+           offset, 
+           newItemLoading, 
+           itemEnded, 
+           loading, 
+           error, 
+           onRequest} = useList({limit: 9, type: "characters"});
     const myRef = useRef();
 
     const addActiveClass = async (i) => {
