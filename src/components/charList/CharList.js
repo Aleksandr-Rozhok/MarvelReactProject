@@ -1,4 +1,5 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
+import { motion } from "framer-motion/dist/framer-motion"
 import PropTypes from 'prop-types';
 
 import './charList.scss';
@@ -26,10 +27,13 @@ const CharList = (props) => {
     let charList = [];
 
     if (list) {
+        let transitionSteak = 0;
         charList = list.map((item, i) => {
+            transitionSteak < 9 ? transitionSteak++ : transitionSteak = 1;
             return <CharListItem 
                         addActiveClass={() => addActiveClass(i)} 
                         onCharSelected={() => props.onCharSelected(item.id)}
+                        transitionSteak={transitionSteak}
                         index={i + 10} 
                         key={item.id} 
                         img={item.thumbnail} 
@@ -42,11 +46,15 @@ const CharList = (props) => {
     
     return (
         <div className="char__list">
-            <ul ref={myRef} className="char__grid">
-                {errorMessage}
-                {spinner}
+            {errorMessage}
+            <motion.ul 
+                ref={myRef} 
+                className="char__grid"
+                initial="hidden"
+                animate="visible">
                 {charList}
-            </ul>
+            </motion.ul>
+            {spinner}
             <button onClick={() => onRequest(offset)}
                     disabled={newItemLoading}
                     style={{'display': itemEnded ? "none" : "block"}} 

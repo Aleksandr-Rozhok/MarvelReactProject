@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion/dist/framer-motion';
+
 import './comicsList.scss';
 
 import {useList} from '../../hooks/list.hook';
-import { Link } from 'react-router-dom';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
@@ -11,13 +13,16 @@ const ComicsList = () => {
     let comicsList = [];
 
     if (list) {
+        let transitionSteak = 0;
         comicsList = list.map((item) => {
+            transitionSteak < 8 ? transitionSteak++ : transitionSteak = 1;
             return <ComicListItem 
                         key={item.id} 
                         id={item.id}
                         img={item.thumbnail} 
                         title={item.title}
-                        price={item.price} />
+                        price={item.price}
+                        transitionSteak={transitionSteak} />
         })
     }
 
@@ -26,11 +31,14 @@ const ComicsList = () => {
 
     return (
         <div className="comics__list">
-            <ul className="comics__grid">
-                {errorMessage}
-                {spinner}
+            {errorMessage}
+            <motion.ul 
+                className="comics__grid"
+                initial="hidden"
+                animate="visible">
                 {comicsList}
-            </ul>
+            </motion.ul>
+            {spinner}
             <button 
                 onClick={() => onRequest(offset)}
                 disabled={newItemLoading}
@@ -44,16 +52,25 @@ const ComicsList = () => {
 
 const ComicListItem = (props) => {   
 
-    const {title, img, price, id} = props;
+    const {title, img, price, id, transitionSteak} = props;
+
+    const item = {
+        visible: custom => ({ opacity: 1, x: 0, transition: { delay: custom * 0.2} }),
+        hidden: { opacity: 0, x: 0 },
+    }
 
     return (
-        <li className="comics__item" key={id}>
+        <motion.li 
+            className="comics__item" 
+            key={id}
+            custom={transitionSteak}
+            variants={item}>
             <Link to={`/comics/${id}`}>
                 <img src={img} alt="ultimate war" className="comics__item-img"/>
                 <div className="comics__item-name">{title}</div>
                 <div className="comics__item-price">{`${price}$`}</div>
             </Link>
-        </li>
+        </motion.li>
     )
 }
 
