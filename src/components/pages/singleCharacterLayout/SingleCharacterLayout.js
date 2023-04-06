@@ -6,7 +6,6 @@ import "./singleCharacterLayout.scss";
 const SingleCharacterLayout = ({data}) => {
 
     const navigate = useNavigate();
-    debugger
     const {thumbnail, name, description} = data;
 
 return (
