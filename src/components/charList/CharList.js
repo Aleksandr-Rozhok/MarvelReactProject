@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { motion } from "framer-motion/dist/framer-motion"
 import PropTypes from 'prop-types';
 
