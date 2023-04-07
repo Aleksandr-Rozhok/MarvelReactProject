@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import './randomChar.scss';
-import mjolnir from '../../resources/img/mjolnir.png';
+import "./randomChar.scss";
+import mjolnir from "../../resources/img/mjolnir.png";
 
-import useMarvelService from '../../services/MarvelService';
-import setContent from '../../utils/setContent';
+import useMarvelService from "../../services/MarvelService";
+import setContent from "../../utils/setContent";
 
 const RandomChar = () => {
     const [char, setChar] = useState({});
@@ -24,7 +24,7 @@ const RandomChar = () => {
         const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
         getCharacter(id)
             .then(onCharLoaded)
-            .then(() => setProcess('confirmed'));
+            .then(() => setProcess("confirmed"));
     }
 
     return (

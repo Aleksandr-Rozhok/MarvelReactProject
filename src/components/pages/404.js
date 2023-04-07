@@ -5,16 +5,16 @@ const Page404 = () => {
     return (
         <div>
             <ErrorMessage />
-            <p style={{'textAlign': 'center', 
-                       'fontWeight': 'bold', 
-                       'fontSize': '24px'}}>
-                Page doesn't exist
+            <p style={{"textAlign": "center", 
+                       "fontWeight": "bold", 
+                       "fontSize": "24px"}}>
+                Page doesn"t exist
             </p>
-            <Link style={{'display': 'block', 
-                          'textAlign': 'center', 
-                          'fontWeight': 'bold', 
-                          'fontSize': '24px', 
-                          'marginTop': '30px'}} to='/MarvelReactProject'>
+            <Link style={{"display": "block", 
+                          "textAlign": "center", 
+                          "fontWeight": "bold", 
+                          "fontSize": "24px", 
+                          "marginTop": "30px"}} to="/MarvelReactProject">
                 Back to the main page
             </Link>
         </div>

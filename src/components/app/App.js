@@ -1,9 +1,9 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense } from "react"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { motion } from "framer-motion/dist/framer-motion";
 
 import AppHeader from "../appHeader/AppHeader";
-import Spinner from '../spinner/Spinner';
+import Spinner from "../spinner/Spinner";
 
 const Page404 = lazy(() => import("../pages/404"));
 const MainPage = lazy(() => import("../pages/MainPage"));
@@ -24,7 +24,7 @@ const App = () => {
                 <main>
                     <Suspense fallback={<Spinner />}>
                         <Routes>
-                            <Route path="/" element={<MainPage/>} />
+                            <Route path="/MarvelReactProject/" element={<MainPage/>} />
                             <Route path="/comics" element={<ComicsPage/>} /> 
                             <Route path="/comics/:id" element={<SinglePage 
                                                                         Component={SingleComicLayout}

@@ -1,13 +1,13 @@
-import { useRef } from 'react';
+import { useRef } from "react";
 import { motion } from "framer-motion/dist/framer-motion"
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import './charList.scss';
+import "./charList.scss";
 
-import { useList } from '../../hooks/list.hook';
-import CharListItem from '../charListItem/charListItem';
-import Spinner from '../spinner/Spinner';
-import ErrorMessage from '../errorMessage/ErrorMessage';
+import { useList } from "../../hooks/list.hook";
+import CharListItem from "../charListItem/charListItem";
+import Spinner from "../spinner/Spinner";
+import ErrorMessage from "../errorMessage/ErrorMessage";
 
 const CharList = (props) => {
     const {list, 
@@ -57,7 +57,7 @@ const CharList = (props) => {
             {spinner}
             <button onClick={() => onRequest(offset)}
                     disabled={newItemLoading}
-                    style={{'display': itemEnded ? "none" : "block"}} 
+                    style={{"display": itemEnded ? "none" : "block"}} 
                     className="button button__main button__long">
                 <div className="inner">load more</div>
             </button>

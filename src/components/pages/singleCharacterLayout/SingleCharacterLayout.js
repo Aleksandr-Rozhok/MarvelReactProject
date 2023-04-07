@@ -1,12 +1,12 @@
-import { Link, useNavigate  } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { Link, useNavigate  } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 import "./singleCharacterLayout.scss";
 
 const SingleCharacterLayout = ({data}) => {
 
-    const navigate = useNavigate();
-    const {thumbnail, name, description} = data;
+const navigate = useNavigate();
+const {thumbnail, name, description} = data;
 
 return (
         <div className="single-char">

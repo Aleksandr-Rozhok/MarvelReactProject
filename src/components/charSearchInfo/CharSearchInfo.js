@@ -1,12 +1,12 @@
-import { Formik, Form, Field, ErrorMessage as FormikErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage as FormikErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-import './charSearchInfo.scss';
+import "./charSearchInfo.scss";
 
-import useMarvelService from '../../services/MarvelService';
-import ErrorMessage from '../errorMessage/ErrorMessage';
+import useMarvelService from "../../services/MarvelService";
+import ErrorMessage from "../errorMessage/ErrorMessage";
 
 const CharSearchInfo = () => {
 
@@ -39,7 +39,7 @@ const CharSearchInfo = () => {
     return (
         <div className="char__search-info">
             <Formik 
-                initialValues = {{charName: ''}}
+                initialValues = {{charName: ""}}
                 validationSchema = {Yup.object({
                     charName: Yup.string()
                             .required("This field is required")
@@ -54,7 +54,7 @@ const CharSearchInfo = () => {
                             type="text" 
                             id="charName"
                             name="charName"
-                            placeholder='Enter name' 
+                            placeholder="Enter name" 
                             className="char__search-input" />
                         <button className="button button__main" type="submit" disabled={loading}>
                             <div className="inner">Find</div>

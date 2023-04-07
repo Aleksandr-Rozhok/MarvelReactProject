@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-import './charInfo.scss';
+import "./charInfo.scss";
 
-import useMarvelService from '../../services/MarvelService';
-import setContent from '../../utils/setContent';
+import useMarvelService from "../../services/MarvelService";
+import setContent from "../../utils/setContent";
 
 const CharInfo = (props) => {
     const [char, setChar] = useState(null);
@@ -31,7 +31,7 @@ const CharInfo = (props) => {
         clearError();
         getCharacter(charId)
             .then(onCharsLoaded)
-            .then(() => setProcess('confirmed'));
+            .then(() => setProcess("confirmed"));
     }
 
     const onCharsLoaded = (char) => {

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion/dist/framer-motion"
 
-import './charListItem.scss';
+import "./charListItem.scss";
 
 const CharListItem = (props) => {   
 

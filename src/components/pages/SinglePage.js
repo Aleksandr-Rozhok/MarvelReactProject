@@ -1,9 +1,9 @@
-import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-import useMarvelService from '../../services/MarvelService';
-import AppBanner from '../appBanner/AppBanner';
-import setContent from '../../utils/setContent';
+import useMarvelService from "../../services/MarvelService";
+import AppBanner from "../appBanner/AppBanner";
+import setContent from "../../utils/setContent";
 
 const SinglePage = ({Component, dataType}) => {
 
@@ -18,15 +18,15 @@ const SinglePage = ({Component, dataType}) => {
     const updateData = () => {
         clearError();
         switch (dataType) {
-            case 'comic':
+            case "comic":
                 getComic(id)
                     .then(onDataLoaded)
-                    .then(() => setProcess('confirmed'));
+                    .then(() => setProcess("confirmed"));
                 break;
-            case 'character':
+            case "character":
                 getCharacter(id)
                     .then(onDataLoaded)
-                    .then(() => setProcess('confirmed'));
+                    .then(() => setProcess("confirmed"));
         }
     }
 

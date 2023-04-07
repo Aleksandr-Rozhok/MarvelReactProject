@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion/dist/framer-motion';
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion/dist/framer-motion";
 
-import './comicsList.scss';
+import "./comicsList.scss";
 
-import {useList} from '../../hooks/list.hook';
-import Spinner from '../spinner/Spinner';
-import ErrorMessage from '../errorMessage/ErrorMessage';
+import {useList} from "../../hooks/list.hook";
+import Spinner from "../spinner/Spinner";
+import ErrorMessage from "../errorMessage/ErrorMessage";
 
 const ComicsList = () => {
     const {list, offset, newItemLoading, itemEnded, loading, error, onRequest} = useList({limit: 8, type: "comics"});
@@ -42,7 +42,7 @@ const ComicsList = () => {
             <button 
                 onClick={() => onRequest(offset)}
                 disabled={newItemLoading}
-                style={{'display': itemEnded ? "none" : "block"}} 
+                style={{"display": itemEnded ? "none" : "block"}} 
                 className="button button__main button__long">
                 <div className="inner">load more</div>
             </button>
